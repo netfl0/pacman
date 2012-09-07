@@ -1,0 +1,39 @@
+pkgname="yaf"
+pkgver="2.2.2"
+pkgrel=1
+pkgdesc="Yet Another Flow sensor"
+arch=("i686" "x86_64")
+url='http://tools.netsa.cert.org/yaf/'
+license=('GPL')
+groups=()
+depends=(pkg-config libfixbuf)
+makedepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=(http://tools.netsa.cert.org/releases/$pkgname-$pkgver.tar.gz)
+noextract=()
+sha256sums=('866c700d48d65c9d22fb8901e992e57f967fec3a0c3b9d03844b93b31b1142ae')
+
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --enable-plugins
+
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}
+
+# vim:set ts=2 sw=2 et:
+

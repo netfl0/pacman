@@ -1,0 +1,37 @@
+pkgname="libfixbuf"
+pkgver="1.1.2"
+pkgrel=1
+pkgdesc="IPFIX Message Format Implementation"
+arch=("i686" "x86_64")
+url='http://tools.netsa.cert.org/fixbuf/'
+license=('GPL')
+groups=()
+depends=('glib2>=2.4.7')
+makedepends=('pkg-config')
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=(http://tools.netsa.cert.org/releases/$pkgname-$pkgver.tar.gz)
+noextract=()
+sha256sums=('2f5c0000d428c9cb22177cb181841b05eae2a462ee9eade7a0910547c917d636')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr
+
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}
+
+# vim:set ts=2 sw=2 et:
